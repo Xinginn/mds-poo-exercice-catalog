@@ -43,6 +43,13 @@ class MovieController extends Controller
     ]);
   }
 
+  public static function showRandom()
+  {
+    return view('movie', [
+      'movie' =>Movie::inRandomOrder()->first()
+    ]);
+  }
+
 
   public function edit($id)
   {

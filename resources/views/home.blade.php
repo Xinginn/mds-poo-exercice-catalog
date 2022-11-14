@@ -32,6 +32,11 @@
     <h2>
       <a href="/movies"> Access the Catalog </a>
     </h2>
+    
+
+    <h3>
+      <a href="/genres">Check all genres</a>
+    </h3>
 
     <div class="wrapper">
       @foreach ($movies as $movie)

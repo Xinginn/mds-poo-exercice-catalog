@@ -20,14 +20,23 @@ class MovieController extends Controller
     $criteriaQuery = ($request->has('order_by')) ? $request->query('order_by') : 'startYear';
     $orderQuery = ($request->has('order')) ? $request->query('order') : 'desc';
 
+    $genreFilter = ($request->has('genre')) ? $request->query('genre') : null;
+
+
     return view('movies', [
-      'movies' => Movie::orderBy($criteriaQuery, $orderQuery)
+      'movies' => Movie::when($genreFilter != null, function($query) use($request) {
+          return $query->whereHas('genres', function($query) use($request){
+            return $query->where('id', $request->genre);
+          });
+        })
+        ->orderBy($criteriaQuery, $orderQuery)
         ->skip(($pageQuery -1) * $moviesPerPage )
         ->take($moviesPerPage)
         ->get(),
       'page' => $pageQuery,
       'criteria' => $criteriaQuery,
-      'order' => $orderQuery
+      'order' => $orderQuery,
+      'genre' => $genreFilter
     ]);
   }
 

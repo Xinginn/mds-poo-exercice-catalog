@@ -79,7 +79,7 @@
       @endforeach
     </div>
     <!-- End List -->
-
+    <br>
     <a href="/">Home</a>
   </div>
 </body>

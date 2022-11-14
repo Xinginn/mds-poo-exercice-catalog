@@ -27,7 +27,7 @@
     <!-- Movie list -->
     <h2>Genres:</h2>
     @foreach ($genres as $genre)   
-      <span>{{$genre->label}}</span><br>
+      <a href="/movies?genre={{$genre->id}}">{{$genre->label}}</a><br>
 
     @endforeach
     <!-- End List -->

@@ -13,6 +13,12 @@ class MovieController extends Controller
     //
   }
 
+  public static function list() {
+    return view('movies', [
+      'movies' => Movie::orderBy('startYear', 'desc')->take(20)->get()
+    ]);
+  }
+
   public function create()
   {
     //

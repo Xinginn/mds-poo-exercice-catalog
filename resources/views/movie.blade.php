@@ -28,7 +28,7 @@
         <h1>{{ config('app.name') }}</h1>
 
         <div class="wrapper">
-            <h1> {{ $movie->primaryTitle }} </h1>
+            <h3> {{ $movie->primaryTitle }} </h3>
             <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
         </div>
 

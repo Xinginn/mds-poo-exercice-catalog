@@ -15,12 +15,17 @@
   <style>
     .container {
       margin: auto;
-      max-width: 900px;
+      max-width: 1000px;
     }
 
-    .wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+    .list-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      max-width: 300px;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -31,40 +36,49 @@
 
     <!-- order parameters -->
     <select onchange="changePage(this);">
-      @for ($i = 1 ; $i < 11; $i++) 
-        <option value="{{$i}}" {{ ( $page == $i ) ? 'selected' : '' }}>Page {{ $i }} </option>
-      @endfor
+      @for ($i = 1 ; $i < 11; $i++) <option value="{{$i}}" {{ ( $page == $i ) ? 'selected' : '' }}>Page {{ $i }} </option>
+        @endfor
     </select>
-
+    <br>
     Order by:
     <select onchange="changeCriteria(this);">
       <option {{ ( $criteria == 'startYear' ) ? 'selected' : '' }} value="startYear">Release date</option>
-      <option  {{ ( $criteria == 'averageRating' ) ? 'selected' : '' }} value="averageRating">Audience Rating</option>
+      <option {{ ( $criteria == 'averageRating' ) ? 'selected' : '' }} value="averageRating">Audience Rating</option>
     </select>
-
+    <br>
     <input type="radio" id="orderAsc" name="order" value="asc" onclick="changeOrder(this);" {{ ( $order == 'asc' ) ? 'checked' : '' }}>
     <label for="orderAsc">Ascending</label>
     <input type="radio" id="orderDesc" name="order" value="desc" onclick="changeOrder(this);" {{ ( $order == 'desc' ) ? 'checked' : '' }}>
     <label for="orderDesc">Descending</label>
-
+    <br>
     <button onclick="querySortedPages()">Go</button>
+    <!-- End parameters -->
 
 
-     <!-- movie list -->
+    <!-- Movie list -->
     <h4>Displaying films {{ ($page-1) * 20 + 1}} to {{ $page * 20 }}:</h4>
-    <?php $i = 1; ?>
-    <div class="wrapper">
+    <div class="list-container">
       @foreach ($movies as $movie)
-      <div>
-        <?php echo "<h2>#$i</h2>";
-        $i++; ?>
+      <div class="card">
+        <h2>{{$movie->primaryTitle}}</h2>
         <a href="/movies/{{ $movie->id }}">
           <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
         </a>
+
+
+        <br>
+        <b>Release Year:</b> {{ $movie->startYear }}
+        <br>
+        <b>Duration:</b> {{ $movie->runtimeMinutes }} minutes
+        <br>
+        <b>Rating:</b> {{ $movie->averageRating }} / 10
+
+        <br>
       </div>
 
       @endforeach
     </div>
+    <!-- End List -->
 
     <a href="/">Home</a>
   </div>
@@ -73,11 +87,11 @@
 </html>
 
 <script>
-  <?php 
-    echo "var page = $page; var criteria = '$criteria'; var order = '$order'";
+  <?php
+  echo "var page = $page; var criteria = '$criteria'; var order = '$order'";
   ?>;
 
-  function changePage(pageSelect){
+  function changePage(pageSelect) {
     page = pageSelect.value;
   }
 
@@ -89,7 +103,7 @@
     order = orderRadio.value;
   }
 
-  function querySortedPages(){
+  function querySortedPages() {
     let query = `/movies?page=${page}&order_by=${criteria}&order=${order}`;
     window.location.replace(`/movies?page=${page}&order_by=${criteria}&order=${order}`);
   }

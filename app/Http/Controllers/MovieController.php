@@ -17,12 +17,17 @@ class MovieController extends Controller
   public static function list(Request $request) {
     $moviesPerPage = 20;
     $pageQuery = $request->query('page');
+    $criteriaQuery = $request->query('order_by');
+    $orderQuery = $request->query('order');
+
     return view('movies', [
-      'movies' => Movie::orderBy('startYear', 'desc')
+      'movies' => Movie::orderBy($criteriaQuery, $orderQuery)
         ->skip(($pageQuery -1) * $moviesPerPage )
         ->take($moviesPerPage)
         ->get(),
-      'page' => $pageQuery
+      'page' => $pageQuery,
+      'criteria' => $criteriaQuery,
+      'order' => $orderQuery
     ]);
   }
 

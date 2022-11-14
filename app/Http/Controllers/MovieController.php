@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Input\Input;
 
 class MovieController extends Controller
 {
@@ -13,9 +14,15 @@ class MovieController extends Controller
     //
   }
 
-  public static function list() {
+  public static function list(Request $request) {
+    $moviesPerPage = 20;
+    $pageQuery = $request->query('page');
     return view('movies', [
-      'movies' => Movie::orderBy('startYear', 'desc')->take(20)->get()
+      'movies' => Movie::orderBy('startYear', 'desc')
+        ->skip(($pageQuery -1) * $moviesPerPage )
+        ->take($moviesPerPage)
+        ->get(),
+      'page' => $pageQuery
     ]);
   }
 

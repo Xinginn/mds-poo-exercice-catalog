@@ -29,17 +29,24 @@
   <div class="container">
     <h1>{{ config('app.name') }}</h1>
 
-    <h2>Latest 20 films:</h2>
-    <?php $i = 1;?>
+    <select onchange="changePage(this);">
+      @for ($i = 1 ; $i < 11; $i++) 
+        <option value="{{$i}}" {{ ( $page == $i ) ? 'selected' : '' }}>Page {{ $i }} </option>
+      @endfor
+    </select>
+
+    <h4>Displaying films {{ ($page-1) * 20 + 1}} to {{ $page * 20 }}:</h4>
+    <?php $i = 1; ?>
     <div class="wrapper">
       @foreach ($movies as $movie)
       <div>
-        <?php echo "<h2>#$i</h2>"; $i++; ?>
+        <?php echo "<h2>#$i</h2>";
+        $i++; ?>
         <a href="/movies/{{ $movie->id }}">
           <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
         </a>
       </div>
-      
+
       @endforeach
     </div>
 
@@ -49,3 +56,9 @@
 </body>
 
 </html>
+
+<script>
+  function changePage(selectObject){
+    window.location.replace(`/movies?page=${selectObject.value}`);
+  }
+</script>

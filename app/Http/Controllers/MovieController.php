@@ -16,9 +16,9 @@ class MovieController extends Controller
 
   public static function list(Request $request) {
     $moviesPerPage = 20;
-    $pageQuery = $request->query('page');
-    $criteriaQuery = $request->query('order_by');
-    $orderQuery = $request->query('order');
+    $pageQuery = ($request->has('page')) ? $request->query('page') : 1;
+    $criteriaQuery = ($request->has('order_by')) ? $request->query('order_by') : 'startYear';
+    $orderQuery = ($request->has('order')) ? $request->query('order') : 'desc';
 
     return view('movies', [
       'movies' => Movie::orderBy($criteriaQuery, $orderQuery)

@@ -15,7 +15,7 @@ class MovieController extends Controller
   }
 
   public static function list(Request $request) {
-    $moviesPerPage = 20;
+    $itemsPerPage = 20;
     $pageQuery = ($request->has('page')) ? $request->query('page') : 1;
     $criteriaQuery = ($request->has('order_by')) ? $request->query('order_by') : 'startYear';
     $orderQuery = ($request->has('order')) ? $request->query('order') : 'desc';
@@ -30,8 +30,8 @@ class MovieController extends Controller
           });
         })
         ->orderBy($criteriaQuery, $orderQuery)
-        ->skip(($pageQuery -1) * $moviesPerPage )
-        ->take($moviesPerPage)
+        ->skip(($pageQuery -1) * $itemsPerPage )
+        ->take($itemsPerPage)
         ->get(),
       'page' => $pageQuery,
       'criteria' => $criteriaQuery,

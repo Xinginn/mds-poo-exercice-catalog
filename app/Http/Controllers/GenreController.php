@@ -12,4 +12,5 @@ class GenreController extends Controller
       'genres' => Genre::all()
     ]);
   }
+  
 }

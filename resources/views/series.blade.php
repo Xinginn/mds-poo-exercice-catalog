@@ -36,7 +36,7 @@
 
     <!-- order parameters -->
     <select onchange="changePage(this);">
-      @for ($i = 1 ; $i < 11; $i++) <option value="{{$i}}" {{ ( $page == $i ) ? 'selected' : '' }}>Page {{ $i }} </option>
+      @for ($i = 1 ; $i < 14; $i++) <option value="{{$i}}" {{ ( $page == $i ) ? 'selected' : '' }}>Page {{ $i }} </option>
         @endfor
     </select>
     <br>
@@ -55,23 +55,22 @@
     <!-- End parameters -->
 
 
-    <!-- Movie list -->
-    <h4>Displaying movies {{ ($page-1) * 20 + 1}} to {{ $page * 20 }}:</h4>
+    <!-- Series list -->
+    <h4>Displaying series {{ ($page-1) * 20 + 1}} to {{ $page * 20 }}:</h4>
     <div class="list-container">
-      @foreach ($movies as $movie)
+      @foreach ($series as $item)
       <div class="card">
-        <h2>{{$movie->primaryTitle}}</h2>
-        <a href="/movies/{{ $movie->id }}">
-          <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
+        <h2>{{$item->primaryTitle}}</h2>
+        <a href="/series/{{ $item->id }}">
+          <img src="{{ $item->poster }}" alt="{{ $item->primaryTitle }}">
         </a>
 
-
         <br>
-        <b>Release Year:</b> {{ $movie->startYear }}
+        <b>Release Year:</b> {{ $item->startYear }}
         <br>
-        <b>Duration:</b> {{ $movie->runtimeMinutes }} minutes
+        <b>Duration:</b> {{ $item->runtimeMinutes }} minutes
         <br>
-        <b>Rating:</b> {{ $movie->averageRating }} / 10
+        <b>Rating:</b> {{ $item->averageRating }} / 10
 
         <br>
       </div>
@@ -104,7 +103,7 @@
   }
 
   function querySortedPages() {
-    let query = `/movies?page=${page}&order_by=${criteria}&order=${order}`;
-    window.location.replace(`/movies?page=${page}&order_by=${criteria}&order=${order}`);
+    let query = `/series?page=${page}&order_by=${criteria}&order=${order}`;
+    window.location.replace(`/series?page=${page}&order_by=${criteria}&order=${order}`);
   }
 </script>

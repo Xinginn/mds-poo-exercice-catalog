@@ -17,11 +17,6 @@
       margin: auto;
       max-width: 900px;
     }
-
-    .wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-    }
   </style>
 </head>
 
@@ -29,28 +24,27 @@
   <div class="container">
     <h1>{{ config('app.name') }}</h1>
 
-    <h2>
-      <a href="/movies"> Movies </a>
-    </h2>
+    <div>
+      <h2> {{ $series->primaryTitle }} </h2>
+      <img src="{{ $series->poster }}" alt="{{ $series->primaryTitle }}">
+    </div>
+    <br>
+    <b>Release Year:</b> {{ $series->startYear }}
+    <br>
+    <b>Duration:</b> {{ $series->runtimeMinutes }} minutes
+    <br>
+    <b>Rating:</b> {{ $series->averageRating }} / 10
 
-    <h2>
-      <a href="/series"> Series </a>
-    </h2>
+    <br>
 
-    <h2>
-      <a href="/genres"> Genres </a>
-    </h2>
-
-    <div class="wrapper">
-      @foreach ($movies as $movie)
-      <div>
-        <a href="/movies/{{ $movie->id }}">
-          <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
-        </a>
-      </div>
-      @endforeach
+    <div>
+      <h4>Synopsis:</h4>
+      <p>
+        {{ $series->plot }}
+      </p>
     </div>
 
+    <a href="/">Home</a>
   </div>
 </body>
 

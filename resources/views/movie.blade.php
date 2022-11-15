@@ -18,11 +18,33 @@
       max-width: 900px;
     }
 
-    .movie-block {}
+    .navbar {
+      display: flex;
+      padding-bottom: 1em;
+    }
+
+    .navbar a {
+      width: 75px;
+      height: 38px;
+      color: white;
+      font-size: larger;
+      background-color: darkblue;
+      border: solid 1px white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   </style>
 </head>
 
 <body>
+  <nav class="navbar">
+    <a href="/"> Home </a>
+    <a href="/movies"> Movies </a>
+    <a href="/genres"> Genres </a>
+    <a href="/series"> Series </a>
+  </nav>
+
   <div class="container">
     <h1>{{ config('app.name') }}</h1>
 
@@ -46,7 +68,6 @@
       </p>
     </div>
 
-    <a href="/">Home</a>
   </div>
 </body>
 

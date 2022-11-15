@@ -21,20 +21,25 @@
 </head>
 
 <body>
+  <nav class="navbar">
+    <a href="/movies"> Home </a>
+    <a href="/movies"> Movies </a>
+    <a href="/movies"> Genres </a>
+    <a href="/movies"> Series </a>
+  </nav>
+
   <div class="container">
     <h1>{{ config('app.name') }}</h1>
 
     <!-- Movie list -->
     <h2>Genres:</h2>
-    @foreach ($genres as $genre)   
-      <a href="/movies?genre={{$genre->id}}">{{$genre->label}}</a><br>
+    @foreach ($genres as $genre)
+    <a href="/movies?genre={{$genre->id}}">{{$genre->label}}</a><br>
 
     @endforeach
     <!-- End List -->
 
-    <br>
-    <br>
-    <a href="/">Home</a>
+
   </div>
 </body>
 

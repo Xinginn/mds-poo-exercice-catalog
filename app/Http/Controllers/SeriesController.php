@@ -34,6 +34,13 @@ class SeriesController extends Controller
     ]);
   }
 
+  public static function show($id)
+  {
+    return view('series-single', [
+      'series' => Series::findOrFail($id)
+    ]);
+  }
+
   public static function showRandom()
   {
     return view('series-single', [

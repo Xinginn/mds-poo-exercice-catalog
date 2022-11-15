@@ -47,15 +47,28 @@
 
   <div class="container">
     <h1>{{ config('app.name') }}</h1>
-
-    <!-- Movie list -->
-    <h2>Genres:</h2>
-    @foreach ($genres as $genre)
-    <a href="/movies?genre={{$genre->id}}">{{$genre->label}}</a><br>
-
+    <!-- Episode list -->
+    <h2>Episodes for season {{ $season }}:</h2>
+    <?php $i = 1; ?>
+    @foreach ($episodes as $item)
+    <h2>#{{ $i }} {{ $item->primaryTitle }}</h2>
+    <a href="/series/{{ $series }}/season/{{ $season }}/episode/{{ $item->id }}">
+      <img src="{{ $item->poster }}" alt="{{ $item->primaryTitle }}">
+    </a>
+    <br>
+    <b>Release Year:</b> {{ $item->startYear }}
+    <br>
+    <b>Duration:</b> {{ $item->runtimeMinutes }} minutes
+    <br>
+    <b>Rating:</b> {{ $item->averageRating }} / 10
+    <?php $i++; ?>
     @endforeach
     <!-- End List -->
 
+    <br>
+    <div>
+      <a href="/series/{{ $series }}">Back to series description</a>
+    </div>
 
   </div>
 </body>

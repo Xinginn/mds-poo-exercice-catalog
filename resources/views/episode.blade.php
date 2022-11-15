@@ -15,7 +15,7 @@
   <style>
     .container {
       margin: auto;
-      max-width: 1000px;
+      max-width: 900px;
     }
 
     .navbar {
@@ -48,15 +48,30 @@
   <div class="container">
     <h1>{{ config('app.name') }}</h1>
 
-    <!-- Movie list -->
-    <h2>Genres:</h2>
-    @foreach ($genres as $genre)
-    <a href="/movies?genre={{$genre->id}}">{{$genre->label}}</a><br>
+    <div>
+      <h2> {{ $episode->primaryTitle }} </h2>
+      <img src="{{ $episode->poster }}" alt="{{ $episode->primaryTitle }}">
+    </div>
+    <br>
+    <b>Release Year:</b> {{ $episode->startYear }}
+    <br>
+    <b>Duration:</b> {{ $episode->runtimeMinutes }} minutes
+    <br>
+    <b>Rating:</b> {{ $episode->averageRating }} / 10
 
-    @endforeach
-    <!-- End List -->
+    <br>
 
+    <div>
+      <h4>Synopsis:</h4>
+      <p>
+        {{ $episode->plot }}
+      </p>
+    </div>
 
+    <br>
+    <div>
+      <a href="/series/{{ $episode->series_id }}/season/{{ $episode->seasonNumber }}">Back to episode list</a>
+    </div>
   </div>
 </body>
 

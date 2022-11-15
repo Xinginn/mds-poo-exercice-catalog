@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\SeriesController;
@@ -32,3 +33,5 @@ Route::get('/movies/{id}', [MovieController::class, 'show']);
 Route::get('/series', [SeriesController::class, 'list']);
 Route::get('/series/random', [SeriesController::class, 'showRandom']);
 Route::get('/series/{id}', [SeriesController::class, 'show']);
+Route::get('/series/{series_id}/season/{season_num}', [EpisodeController::class, 'listBySeason']);
+Route::get('/series/{series_id}/season/{season_num}/episode/{id}', [EpisodeController::class, 'show']);

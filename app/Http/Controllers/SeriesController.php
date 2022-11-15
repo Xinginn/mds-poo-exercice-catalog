@@ -10,12 +10,10 @@ class SeriesController extends Controller
 
   public static function list(Request $request) {
     $itemsPerPage = 20;
-    $pageQuery = ($request->has('page')) ? $request->query('page') : 1;
-    $criteriaQuery = ($request->has('order_by')) ? $request->query('order_by') : 'startYear';
-    $orderQuery = ($request->has('order')) ? $request->query('order') : 'desc';
-
-    $genreFilter = ($request->has('genre')) ? $request->query('genre') : null;
-
+    $pageQuery = $request->query('page', 1);
+    $criteriaQuery = $request->query('order_by','startYear');
+    $orderQuery = $request->query('order', 'desc');
+    $genreFilter = $request->query('genre', null);
 
     return view('series', [
       'series' => Series::when($genreFilter != null, function($query) use($request) {

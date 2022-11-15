@@ -38,13 +38,6 @@
 </head>
 
 <body>
-  <nav class="navbar">
-    <a href="/"> Home </a>
-    <a href="/movies"> Movies </a>
-    <a href="/genres"> Genres </a>
-    <a href="/series"> Series </a>
-  </nav>
-
 
   <div class="container">
     <h1>{{ config('app.name') }}</h1>

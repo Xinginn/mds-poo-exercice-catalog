@@ -1,0 +1,38 @@
+<nav class="navbar">
+  <div style="display:flex" ;>
+    <a href="/"> Home </a>
+    <a href="/movies"> Movies </a>
+    <a href="/genres"> Genres </a>
+    <a href="/series"> Series </a>
+  </div>
+
+  <form action="/search" method="get">
+    <input id="search-input" name="query" type="text">
+    <input type="submit" value="Search">
+  </form>
+</nav>
+
+<style>
+  .navbar {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    display: flex;
+    padding-bottom: 1em;
+    justify-content: space-between;
+  }
+
+  .navbar a {
+    width: 75px;
+    height: 38px;
+    color: white;
+    font-size: larger;
+    background-color: darkblue;
+    border: solid 1px white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navbar form {
+    display: block;
+  }
+</style>

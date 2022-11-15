@@ -23,7 +23,6 @@
 <body>
   @include('navbar')
   <div class="container">
-    <h1>{{ config('app.name') }}</h1>
     <!-- Episode list -->
     <h2>Episodes for season {{ $season }}:</h2>
     <?php $i = 1; ?>

@@ -32,10 +32,9 @@
 </head>
 
 <body>
+  @include('navbar')
 
   <div class="container">
-    <h1>{{ config('app.name') }}</h1>
-
     <!-- order parameters -->
     <select onchange="changePage(this);">
       @for ($i = 1 ; $i < 11; $i++) <option value="{{$i}}" {{ ( $page == $i ) ? 'selected' : '' }}>Page {{ $i }} </option>

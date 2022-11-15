@@ -41,7 +41,6 @@
 <body>
 
   <div class="container">
-    <h1>{{ config('app.name') }}</h1>
 
     <!-- Search result -->
     <h2>Search results for '{{ $query }}':</h2>

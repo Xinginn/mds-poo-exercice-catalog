@@ -24,7 +24,6 @@
   @include('navbar')
 
   <div class="container">
-    <h1>{{ config('app.name') }}</h1>
 
     <!-- Movie list -->
     <h2>Genres:</h2>

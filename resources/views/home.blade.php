@@ -26,18 +26,25 @@
 </head>
 
 <body>
- @include('navbar') 
+  @include('navbar')
 
   <div class="container">
+  <h1>{{ config('app.name') }}</h1>
 
     <div class="wrapper">
-      @foreach ($movies as $movie)
+
       <div>
-        <a href="/movies/{{ $movie->id }}">
-          <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
-        </a>
+        <h2>Random movie:</h2>
+        <br>
+        <div style="display:flex;flex-direction:column">
+          <b>{{ $movie->primaryTitle }}</b>
+
+          <a href="/movies/{{ $movie->id }}">
+            <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
+          </a>
+        </div>
       </div>
-      @endforeach
+
     </div>
 
   </div>

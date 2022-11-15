@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Episode;
 use App\Models\Series;
 use Illuminate\Http\Request;
 
@@ -34,8 +35,12 @@ class SeriesController extends Controller
 
   public static function show($id)
   {
+
     return view('series-single', [
-      'series' => Series::findOrFail($id)
+      'series' => Series::findOrFail($id),
+      'seasonsNumber' => Episode::where('series_id', $id)
+        ->distinct()
+        ->count('seasonNumber')
     ]);
   }
 

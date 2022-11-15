@@ -10,11 +10,6 @@ use Symfony\Component\Console\Input\Input;
 class MovieController extends Controller
 {
 
-  public function index()
-  {
-    //
-  }
-
   public static function search(Request $request) {
     $titleQuery = $request->query('query');
 
@@ -49,11 +44,6 @@ class MovieController extends Controller
     ]);
   }
 
-  public function create()
-  {
-    //
-  }
-
   public static function show($id)
   {
     return view('movie', [
@@ -64,22 +54,7 @@ class MovieController extends Controller
   public static function showRandom()
   {
     return view('movie', [
-      'movie' =>Movie::inRandomOrder()->first()
+      'movie' =>Movie::inRandomOrder()->whereNotNull('poster')->first()
     ]);
-  }
-
-  public function edit($id)
-  {
-    //
-  }
-
-  public function update(Request $request, $id)
-  {
-    //
-  }
-
-  public function destroy($id)
-  {
-    //
   }
 }

@@ -32,8 +32,8 @@
 
 <body>
 
+  @include('navbar')
   <div class="container">
-    <h1>{{ config('app.name') }}</h1>
 
     <!-- order parameters -->
     <select onchange="changePage(this);">

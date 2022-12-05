@@ -62,10 +62,7 @@
         {{ $series->plot }}
       </p>
     </div>
-
-    @for ($i = 1; $i <= $seasonsNumber; $i++)
-      <a href="/series/{{ $series->id }}/season/{{ $i }}">Season {{ $i }}</a>
-    @endfor
+    
 
   </div>
 </body>

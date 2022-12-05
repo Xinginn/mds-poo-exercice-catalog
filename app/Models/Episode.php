@@ -9,7 +9,10 @@ class Episode extends Title
 {
     use HasFactory;
 
+    /*
     public function series(){
         return $this->belongsTo(Series::class);
     }
+    */
+
 }

@@ -19,9 +19,11 @@ class SeriesController extends TitleController
   {
     return view('series-single', [
       'series' => TitleController::getSingle($id),
+      /*
       'seasonsNumber' => Title::where('series_id', $id)
         ->distinct()
         ->count('seasonNumber')
+      */
     ]);
   }
 

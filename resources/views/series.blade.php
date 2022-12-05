@@ -59,7 +59,7 @@
     <!-- Series list -->
     <h4>Displaying series {{ ($page-1) * 20 + 1}} to {{ $page * 20 }}:</h4>
     <div class="list-container">
-      @foreach ($series as $item)
+      @foreach ($data as $item)
       <div class="card">
         <h2>{{$item->primaryTitle}}</h2>
         <a href="/series/{{ $item->id }}">
@@ -103,6 +103,6 @@
 
   function querySortedPages() {
     let query = `/series?page=${page}&order_by=${criteria}&order=${order}`;
-    window.location.replace(`/series?page=${page}&order_by=${criteria}&order=${order}`);
+    window.location.replace(query);
   }
 </script>

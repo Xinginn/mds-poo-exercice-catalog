@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Episode;
 use Illuminate\Http\Request;
 
-class EpisodeController extends Controller
+class EpisodeController extends TitleController
 {
 
   public static function listBySeason($series_id, $season_num) {
@@ -22,10 +22,8 @@ class EpisodeController extends Controller
   
   public static function show($series_id, $season_num, $id)
   {
-    
     return view('episode', [
-      'episode' => Episode::findOrFail($id)
+      'episode' => TitleController::getSingle($id)
     ]);
-    
   }
 }

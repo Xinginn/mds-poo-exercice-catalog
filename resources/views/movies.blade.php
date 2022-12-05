@@ -59,7 +59,7 @@
     <!-- Movie list -->
     <h4>Displaying movies {{ ($page-1) * 20 + 1}} to {{ $page * 20 }}:</h4>
     <div class="list-container">
-      @foreach ($movies as $movie)
+      @foreach ($data as $movie)
       <div class="card">
         <h2>{{$movie->primaryTitle}}</h2>
         <a href="/movies/{{ $movie->id }}">
@@ -104,6 +104,6 @@
 
   function querySortedPages() {
     let query = `/movies?page=${page}&order_by=${criteria}&order=${order}`;
-    window.location.replace(`/movies?page=${page}&order_by=${criteria}&order=${order}`);
+    window.location.replace(query);
   }
 </script>

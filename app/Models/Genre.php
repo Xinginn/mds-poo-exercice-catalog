@@ -7,13 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Genre extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    public function movies(){
-        return $this->belongsToMany(Movie::class, 'movies_genres');
-    }
+  public function movies(){
+      return $this->belongsToMany(Movie::class, 'movies_genres');
+  }
 
-    public function series(){
-      return $this->belongsToMany(Series::class, 'series_genres');
+  public function series(){
+    return $this->belongsToMany(Series::class, 'series_genres');
+  }
+
+  public function titles(){
+    return $this->belongsToMany(Title::class, 'titles_genres');
   }
 }

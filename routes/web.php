@@ -4,6 +4,7 @@ use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\SeriesController;
+use App\Http\Controllers\TitleController;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
 
@@ -19,14 +20,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-  $movie = Movie::inRandomOrder()->whereNotNull('poster')->first();
-
-  return view('home', ['movie' => $movie]);
+  return view('home', ['movie' => TitleController::getRandom('movie')]);
 });
 
 Route::get('/genres', [GenreController::class, 'list']);
 
 Route::get('/movies', [MovieController::class, 'list']);
+
+
 Route::get('/movies/random', [MovieController::class, 'showRandom']);
 Route::get('/movies/{id}', [MovieController::class, 'show']);
 

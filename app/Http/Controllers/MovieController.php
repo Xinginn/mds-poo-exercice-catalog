@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Models\Series;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
 
-class MovieController extends Controller
+class MovieController extends TitleController
 {
 
   public static function search(Request $request) {
@@ -21,40 +20,24 @@ class MovieController extends Controller
   }
 
   public static function list(Request $request) {
-    $itemsPerPage = 20;
-    $pageQuery = $request->query('page', 1);
-    $criteriaQuery = $request->query('order_by', 'startYear');
-    $orderQuery = $request->query('order', 'desc');
-    $genreFilter = $request->query('genre', null);
+    $request['titleType'] = 'movies';
+    $request['titleDBLabel'] = 'movie';
+    
+    return TitleController::list($request);
 
-    return view('movies', [
-      'movies' => Movie::when($genreFilter != null, function($query) use($request) {
-          return $query->whereHas('genres', function($query) use($request){
-            return $query->where('id', $request->genre);
-          });
-        })
-        ->orderBy($criteriaQuery, $orderQuery)
-        ->skip(($pageQuery -1) * $itemsPerPage )
-        ->take($itemsPerPage)
-        ->get(),
-      'page' => $pageQuery,
-      'criteria' => $criteriaQuery,
-      'order' => $orderQuery,
-      'genre' => $genreFilter
-    ]);
   }
 
   public static function show($id)
   {
     return view('movie', [
-      'movie' => Movie::findOrFail($id)
+      'movie' => TitleController::getSingle($id)
     ]);
   }
 
   public static function showRandom()
   {
     return view('movie', [
-      'movie' =>Movie::inRandomOrder()->whereNotNull('poster')->first()
+      'movies' => TitleController::getRandom('movie')
     ]);
   }
 }

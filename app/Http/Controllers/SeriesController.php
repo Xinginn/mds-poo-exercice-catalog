@@ -2,43 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Episode;
-use App\Models\Series;
+use App\Models\Title;
 use Illuminate\Http\Request;
 
-class SeriesController extends Controller
+class SeriesController extends TitleController
 {
 
   public static function list(Request $request) {
-    $itemsPerPage = 20;
-    $pageQuery = $request->query('page', 1);
-    $criteriaQuery = $request->query('order_by','startYear');
-    $orderQuery = $request->query('order', 'desc');
-    $genreFilter = $request->query('genre', null);
+    $request['titleType'] = 'series';
+    $request['titleDBLabel'] = 'tvSeries';
 
-    return view('series', [
-      'series' => Series::when($genreFilter != null, function($query) use($request) {
-          return $query->whereHas('genres', function($query) use($request){
-            return $query->where('id', $request->genre);
-          });
-        })
-        ->orderBy($criteriaQuery, $orderQuery)
-        ->skip(($pageQuery -1) * $itemsPerPage )
-        ->take($itemsPerPage)
-        ->get(),
-      'page' => $pageQuery,
-      'criteria' => $criteriaQuery,
-      'order' => $orderQuery,
-      'genre' => $genreFilter
-    ]);
+    return TitleController::list($request);
   }
 
   public static function show($id)
   {
-
     return view('series-single', [
-      'series' => Series::findOrFail($id),
-      'seasonsNumber' => Episode::where('series_id', $id)
+      'series' => TitleController::getSingle($id),
+      'seasonsNumber' => Title::where('series_id', $id)
         ->distinct()
         ->count('seasonNumber')
     ]);
@@ -47,7 +28,7 @@ class SeriesController extends Controller
   public static function showRandom()
   {
     return view('series-single', [
-      'series' =>Series::inRandomOrder()->first()
+      'series' => TitleController::getRandom('Series')
     ]);
   }
 }

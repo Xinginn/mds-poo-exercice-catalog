@@ -40,6 +40,7 @@
 
 <body>
 
+  @include('navbar')
   <div class="container">
 
     <!-- Search result -->
